@@ -4,7 +4,7 @@ import { Schema as MongooseSchema } from 'mongoose';
 export class GetQueryDto {
     
     @IsOptional()
-    username: string;
+    correo: string;
 
     @IsOptional()
     password: string;

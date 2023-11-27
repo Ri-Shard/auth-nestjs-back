@@ -11,7 +11,7 @@ export class UsersController {
     @Post('/signup')
     async createUser(
         @Body('password') password: string,
-        @Body('username') username: string,
+        @Body('correo') correo: string,
         @Body('apellido') apellido: string,
         @Body('direccion') direccion: string,
         @Body('ciudad') ciudad: string,
@@ -23,7 +23,7 @@ export class UsersController {
         const saltOrRounds = 10;
         const hashedPassword = await bcrypt.hash(password, saltOrRounds);
         const result = await this.usersService.createUser(
-            username,
+            correo,
             hashedPassword,
             apellido,
             direccion,

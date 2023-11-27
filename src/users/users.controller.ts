@@ -1,7 +1,8 @@
-import { Body, Controller, Post, Get, Param } from '@nestjs/common';
+import { Body, Controller, Post, Get, Param, Query,HttpStatus,Res } from '@nestjs/common';
 import { UsersService } from './users.service';
 import { User } from './users.model';
 import * as bcrypt from 'bcrypt';
+import { GetQueryDto } from './dto/getQuerydto';
 
 @Controller('auth')
 export class UsersController {
@@ -31,5 +32,11 @@ export class UsersController {
             rol,
         );
         return result;
+    }
+
+    @Get('/getUsers')
+    async getAllUsers(@Query() getQueryDto: GetQueryDto, @Res() res: any) {
+        const storages: any = await this.usersService.getUsers(getQueryDto);
+        return res.status(HttpStatus.OK).send(storages);
     }
 }
